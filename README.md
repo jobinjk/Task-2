@@ -12,3 +12,10 @@ Make a backend API using Python-Flask
 9. install gunicorn for testing   `pip install gunicorn`
 10. install insomnia for testing server client relation
 11. run the python file in terminal using `python <name>.py`
+
+### ENDPOINT
+
+* `/messages`; method=`"POST"`; data=`'JSON'`; `{"key":"value"}`
+* `/redirectA`; method=`"GET"`, redirects to A, B then C 
+* `/users/<userid>`; to print some data according to the given key
+* `/secrets`; jus to print some data 
