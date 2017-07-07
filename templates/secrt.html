@@ -1,0 +1,20 @@
+{% include "head.html" %}
+<body ng-controller="MainController">
+    {% include "nav.html" %}
+    <div class ="container">
+    <h1>"Shhh this is top secret spy stuff!"</h1>
+    <button class="btn btn-primary" ng-click="getSecrets()">Secrets</button>
+    </div>
+    <hr>
+    <div id="results" class="container">
+        <table class="table table-responsive table-bordered table-striped">
+            <tr>
+                <th>KEY</th>
+                <th>VALUE</th>
+            </tr>
+            <tr ng-repeat="(k,v) in rows">
+                <td>[[k]]</td><td>[[v]]</td>
+            </tr>
+        </table>
+    </div>
+</body>

@@ -1,11 +1,13 @@
-from flask import Flask, jsonify, request, json, redirect, url_for
+from flask import Flask, jsonify, request, json, redirect, url_for, render_template
+
+import random,string
 
 app = Flask(__name__)   # creating app name
 # app.config['DEBUG'] = True
 @app.route('/') # setting app route for eg 127.0.0.1:5000/<something>
 
 def api_root(): # creating a function api_root which returns some txt to url
-    return 'Welcome to RESTfull FLASK'
+    return render_template('intex.html')
 
 
 
@@ -16,6 +18,9 @@ def api_message(): # creating a function api_message which gives a json data whe
     # data.pop('ashjdja')
     print data
 
+    data['new'] = "new data value"
+
+    print data
     return jsonify(data) # returns the data as json format
 
 # this is to show HTTP 302 response
@@ -33,7 +38,7 @@ def redir_b():
 @app.route('/redirectC')
 def redir_c():
     print "Now in C"
-    return jsonify({'Final destination':'C'}) # received data in c
+    return render_template("redirc.html") # received data in c
 
 # error handling 404
 
@@ -61,20 +66,18 @@ def site_block(error=None):
 
     return resp
 
-@app.route('/users/<userid>', methods = ['GET'])
-def api_users(userid):
-    users = {'1':'john', '2':'steve', '3':'bill'}
-    
-    if userid in users:
-        return jsonify({userid:users[userid]})
-    else:
-        return not_found()
-
 
 @app.route('/secrets')
 def api_hello():
-    return "Shhh this is top secret spy stuff!"
+    return render_template("secrt.html")
 
+@app.route('/secrets/getSecrets', methods = ['GET'])
+def get_secrets():
+    li = [ gen_text() for x in xrange(50)]
+
+    return jsonify(data=li)
+def gen_text():
+    return "".join( [random.choice(string.letters) for i in xrange(15)])
 
 if __name__ == '__main__':
     app.run()
